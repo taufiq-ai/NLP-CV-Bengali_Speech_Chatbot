@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<!-- AI RECEPTION PAGE -->
+<link href="{{url_for('static', filename='css/conversation.css')}}" rel="stylesheet"/>
+<!-- <link href="{{url_for('static', filename='css/flash_speak.css')}}" rel="stylesheet"/> -->
+
+<section style="background-color: rgb(255, 255, 255);">
+    <div class="container py-5">
+  
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-6">
+  
+          <div class="card" id="chat2">
+
+            <div class="card-header d-flex justify-content-between align-items-center p-3">
+              <h5 class="mb-0">AI Reception</h5>
+              <button type="button" class="btn btn-primary btn-sm" data-mdb-ripple-color="dark">Let's Talk</button>
+            </div>
+
+            <div class="card-body" data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px">
+                <div class="divider d-flex align-items-center mb-4">
+                    <p class="text-center mx-3 mb-0" style="color: #a2aab7;">Today</p> <!--DATE-->
+                </div>
+                <!-- STATIC PART -->
+                <!-- BOT -->
+                <div class="d-flex flex-row justify-content-start">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp"
+                  alt="avatar 1" style="width: 45px; height: 100%;">
+                    <div>
+                    <!-- <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;"> -->
+                    <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">
+                      Hello! Welcome to AI Reception of the AIMS Lab. 
+                      If you have any query please click on the mic icon and ask me. 
+                      I'd love to assist you.
+                    </p>
+                    </div>
+                </div>
+                <!-- END BOT -->
+                <!-- END STATIC PART -->
+  
+                <!--DYNAMIC PART-->
+                <!-- USER -->
+              <div class="d-flex flex-row justify-content-end mb-4 pt-1">
+                    <div>
+                        <form action="/conversation" method="post">
+                            <button type="submit"> <!-- id="flash-message-button"-->
+                                <i class="fa fa-microphone small p-2 me-3  text-white rounded-3 bg-primary" style="font-size:30px;color:rgb(245, 57, 57)"></i>
+                            </button>
+                            <!-- <div id="flash-message" style="display:none;">Small flash message</div> -->
+                        </form>
+                        <!-- <p class="small ms-3 mb-3 rounded-3 text-muted">23:58</p> CURRENT TIME -->
+                        <!-- <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">Hiii, I'm good.</p> -->
+                    </div>
+                    
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp" alt="avatar 1" style="width: 45px; height: 100%;">
+              </div>
+              <!-- END USER -->
+
+              <!-- SYSTEM -->
+              <div class="divider d-flex align-items-center mb-4" > <!--id="flash-message" style="display:none;"-->
+                <small class="text-center mx-3 mb-0" style="color: #f12a1c;">Speak after 1.5 sec of clicking mic....</small> <!--DATE-->
+            </div>
+              <!-- END SYSTEM -->
+
+
+              <!--OUUTPUT AUDIO-->
+              <!-- BOT -->
+              <div class="d-flex flex-row justify-content-start">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp"
+                alt="avatar 1" style="width: 45px; height: 100%;">
+                    <div>
+                    <!-- <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;">Please Say... Recognizing</p> -->
+                    <audio controls>
+                        <!-- <source src="" type="audio/ogg"> -->
+                        <source src="{{url_for('static', filename='audio/user1/output.wav')}}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    
+                    </div>
+              </div>
+              <!-- END BOT -->
+              <!--END OUUTPUT AUDIO-->
+              <!--END DYNAMIC PART-->
+  
+  
+            </div>
+           
+          </div>
+  
+        </div>
+      </div>
+  
+    </div>
+  </section>
+  <!-- <script src="{{url_for('static', filename='js/flash_speak.js')}}"></script> -->
+
+  {% endblock %}
