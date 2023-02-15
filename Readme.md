@@ -2,6 +2,7 @@
 
 ## Description
 A Bangla speech-based chatbot App developed using Flask microframework containing modules Speech-to-Text, Conversational Agent, and Text-to-Speech. 
+
 ## Environment
 - Language: Python 3.10.6
 # Installation Procedure
@@ -14,5 +15,19 @@ A Bangla speech-based chatbot App developed using Flask microframework containin
 1. Execute the run.py file.
 1. Visit <http://127.0.0.1:5000>
 
-[The installation procedure is for Linux (ubuntu)]
+<i>[The installation procedure is for Linux (ubuntu)]</i>
+
+## Expalaination of the directory tree**
+```
+- database          : Contains data and dumped models
+- static            : audio, image, text, css, js files
+- templates         : html files
+- speech_to_text.py : methods of ASR/STT module
+- chatbot.py        : methods of CA module
+- text-to-speech.py : methods of TTS/Speech synthesis module
+- views.py          : routing methods of the flask app
+- run.py            : execute it to start server
+- requirements.txt  : required dependencies to install
+```
+
 
