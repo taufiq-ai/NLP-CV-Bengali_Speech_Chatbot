@@ -1,5 +1,6 @@
-﻿NLP-CV-Bengali\_Speech\_Chatbot
-# Description
+# NLP-CV-Bengali_Speech_Chatbot
+
+## Description
 A Bangla speech-based chatbot App developed using Flask microframework containing modules Speech-to-Text, Conversational Agent, and Text-to-Speech. 
 ## Environment
 - Language: Python 3.10.6
