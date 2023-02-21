@@ -35,4 +35,6 @@ A Bangla speech-based chatbot App developed using Flask microframework containin
 https://user-images.githubusercontent.com/70132613/219033047-37a4d986-de44-44fa-aeba-290f7b523394.mp4
 
 ### Face Recognition
+https://user-images.githubusercontent.com/70132613/220410790-5056f041-5a2e-4c4a-b6ea-3a1b4acd9119.mp4
+
 
