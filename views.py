@@ -2,6 +2,7 @@ from flask import Flask, render_template, Response, request
 import pandas as pd
 import joblib
 import os.path
+from face_verification import Video, gen, face_authenticated
 from text_to_speech import text_to_speech
 from speech_to_text import speech_to_text
 from chatbot import chatbot_train, chatbot_ans
@@ -28,7 +29,15 @@ def index():
     return render_template('conversation.html')
 
 
+"""Face Authentication"""
+@app.route('/authentication')
+def authentication():
+    return render_template('face_authentication.html')
 
+
+@app.route('/video')
+def video():
+    return Response(gen(Video()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 
