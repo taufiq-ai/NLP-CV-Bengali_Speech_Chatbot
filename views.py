@@ -20,6 +20,8 @@ else:
     
 
 
+
+
 """Home Page"""
 @app.route('/')
 def index():
@@ -29,6 +31,8 @@ def index():
 
 
 
+
+"""Speech Chatbot"""
 @app.route('/conversation', methods=["GET","POST"])
 def conversation():
     test_text = speech_to_text()
