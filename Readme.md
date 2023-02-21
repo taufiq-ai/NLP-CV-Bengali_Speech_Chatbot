@@ -29,6 +29,10 @@ A Bangla speech-based chatbot App developed using Flask microframework containin
 - run.py            : execute it to start server
 - requirements.txt  : required dependencies to install
 ```
-## Video demonstration
+## Video demonstrations
+
+### Bengali Voice Chatbot
 https://user-images.githubusercontent.com/70132613/219033047-37a4d986-de44-44fa-aeba-290f7b523394.mp4
+
+### Face Recognition
 
