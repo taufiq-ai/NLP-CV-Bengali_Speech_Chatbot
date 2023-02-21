@@ -19,15 +19,17 @@ A Bangla speech-based chatbot App developed using Flask microframework containin
 
 ## Expalaination of the directory tree
 ```
-- database          : Contains data and dumped models
-- static            : audio, image, text, css, js files
-- templates         : html files
-- speech_to_text.py : methods of ASR/STT module
-- chatbot.py        : methods of CA module
-- text-to-speech.py : methods of TTS/Speech synthesis module
-- views.py          : routing methods of the flask app
-- run.py            : execute it to start server
-- requirements.txt  : required dependencies to install
+- database            : Contains data and dumped models
+- static              : audio, image, text, css, js files
+- templates           : html files
+- speech_to_text.py   : methods of ASR/STT module
+- chatbot.py          : methods of CA module
+- text-to-speech.py   : methods of TTS/Speech synthesis module
+- face_verification.py: modules to open webcam and stream video
+- face_encode.py      : encode train data
+- views.py            : routing methods of the flask app
+- run.py              : execute it to start server
+- requirements.txt    : required dependencies to install
 ```
 ## Video demonstrations
 
