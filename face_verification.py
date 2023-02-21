@@ -1,21 +1,34 @@
 import cv2
 import face_recognition
 import numpy as np
+from pandas import read_csv
+from face_encoding import img_encode
+
+# # Load a sample picture and learn how to recognize it.
+# path = "static/image/tusar.jpg"
+# img1_loading = face_recognition.load_image_file(path)
+# img1_encoding = face_recognition.face_encodings(img1_loading)[0]
+
+# # Create arrays of known face encodings and their names
+# known_face_encodings = [
+#     img1_encoding,
+# ]
+# known_face_names = [
+#     "tusar",
+# ]
+# authenticated = False
 
 
-# Load a sample picture and learn how to recognize it.
-path = "static/image/tusar.jpg"
-img1_loading = face_recognition.load_image_file(path)
-img1_encoding = face_recognition.face_encodings(img1_loading)[0]
 
-# Create arrays of known face encodings and their names
-known_face_encodings = [
-    img1_encoding,
-]
-known_face_names = [
-    "tusar",
-]
-authenticated = False
+# fetch dataset of encoded image to get encoded img and user name
+# user_encoded_img_csv_path = "database/encoded_img.csv"
+# df = read_csv(user_encoded_img_csv_path, index_col= False)
+# known_face_encodings, known_face_names = list(df['encoded_img']), list(df['user'])
+
+user_img_csv_path = "database/user_image.csv"
+user_encoded_img_csv_path = "database/encoded_img.csv"
+known_face_encodings, known_face_names = img_encode(user_img_csv_path, user_encoded_img_csv_path)
+
 
 
 # Detect face and bounding boxes
@@ -48,6 +61,10 @@ class Video(object):
         face_names = []
         for face_encoding in face_encodings:
             # See if the face is a match for the known face(s)
+            
+            """
+            problem start here-----------
+            """
             matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
             name = "Unknown"
             # Or instead, use the known face with the smallest distance to the new face
@@ -95,3 +112,4 @@ def gen(camera):
 
 def face_authenticated():
     return authenticated
+
