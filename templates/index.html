@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block body %}
+<header>
+    <img src="{{url_for('static', filename='image/UIU.jpg')}}" width=100%>
+</header>    
+<section class="page-section bg-dark text-white mb-0">
+    <div class="container-fluid px-1 py-5 mx-auto"> 
+        <div class="row d-flex justify-content-center text-center">
+            <div class="col-xl-11 col-lg-11 col-md-9 col-11 text-center">
+              <h3>AI Reception</h3>
+              <small>An Intelligent Receptionist Syetem Integrating with Face, Speech and Interaction Recognition</small>
+              <br>  
+              <br>  
+              <div class="card">
+                    <p class="text-dark">
+                        Dummy Text! Artificial Intelligence enabled automated reception to perform as a human receptionist to avoid face-to-face interaction among mass people regarding their daily service in the current pandemic. Inspired by their current problem of mass congestion, our proposed AI-based Smart Reception can authenticate users and interact in Bangla language with humans by responding to university-domain-related queries, resulting in better business service and outcomes. We used OpenFace face recognition for authentication, having an accuracy of 92.92% with 1×10-5 second training time for a new image by saving the image dataset as a collection of an array file. The Interaction Recognition system consists of three modules: Automatic Speech Recognition (ASR), Interactive Agent, and Text-to-Speech (TTS) Synthesis. We used the OpenSLR- Large Bengali ASR Training Data to train the Deep Speech 2 model for ASR with a Word Error Rate (WER) of 42.15%. We tested our developed database management architecture for the Interaction Recognition system with the three-step evaluation using BERT sentence transformer (paraphrase-mpnet-base-v2) that provided satisfactory responses with 92% accuracy, increasing the receptionist performance significantly. TTS module relays on WavNet gTTS model. Our research also demonstrated that a developed AI-based system could be an adaptive solution for any domain-specific reception system responsible for systematic and efficient customer service offline and online.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+ </section> 
+{% endblock %}

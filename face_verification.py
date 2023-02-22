@@ -3,31 +3,11 @@ import face_recognition
 import numpy as np
 from pandas import read_csv
 from face_encoding import img_encode
+authenticated = False
 
-# # Load a sample picture and learn how to recognize it.
-# path = "static/image/tusar.jpg"
-# img1_loading = face_recognition.load_image_file(path)
-# img1_encoding = face_recognition.face_encodings(img1_loading)[0]
-
-# # Create arrays of known face encodings and their names
-# known_face_encodings = [
-#     img1_encoding,
-# ]
-# known_face_names = [
-#     "tusar",
-# ]
-# authenticated = False
-
-
-
-# fetch dataset of encoded image to get encoded img and user name
+# user_img_csv_path = "database/user_registration_data.csv"
 # user_encoded_img_csv_path = "database/encoded_img.csv"
-# df = read_csv(user_encoded_img_csv_path, index_col= False)
-# known_face_encodings, known_face_names = list(df['encoded_img']), list(df['user'])
-
-user_img_csv_path = "database/user_image.csv"
-user_encoded_img_csv_path = "database/encoded_img.csv"
-known_face_encodings, known_face_names = img_encode(user_img_csv_path, user_encoded_img_csv_path)
+# known_face_encodings, known_face_names = img_encode(user_img_csv_path, user_encoded_img_csv_path)
 
 
 
@@ -72,10 +52,12 @@ class Video(object):
             best_match_index = np.argmin(face_distances)
             if matches[best_match_index]:
                 name = known_face_names[best_match_index]
-            
+                # print(name)
             if name != "Unknown":
                 recognized = True
                 # print(name,"\n")
+            else:
+                recognized = False
 
             face_names.append(name)
     
@@ -99,6 +81,10 @@ class Video(object):
 
 
 def gen(camera):
+    user_img_csv_path = "database/user_registration_data.csv"
+    user_encoded_img_csv_path = "database/encoded_img.csv"
+    known_face_encodings, known_face_names = img_encode(user_img_csv_path, user_encoded_img_csv_path)
+    print("Images encoded")
     while True:
         recognized,frame=camera.get_frame(known_face_encodings, known_face_names)
         yield(b'--frame\r\n'
@@ -109,7 +95,10 @@ def gen(camera):
             global authenticated
             authenticated = True
             # print(authenticated)
+        # else: 
+            # print(authenticated)
 
 def face_authenticated():
+    global authenticated
     return authenticated
 

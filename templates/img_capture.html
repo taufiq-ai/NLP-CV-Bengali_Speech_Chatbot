@@ -1,0 +1,30 @@
+
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Camera Capture</title>
+</head>
+<body> -->
+    <!-- <link href="{{url_for('static', filename='css/img_capture.js')}}" rel="stylesheet"/>  -->
+
+<h3>Upload a picture</h3>
+    
+    <div id="camera-container">
+        <video id="camera-stream" width="640" height="480" autoplay></video>
+        <canvas id="camera-canvas" width="640" height="480"></canvas>
+        <button id="camera-capture">Capture</button>
+        <a class="nav-link" href="{{ url_for('authentication') }}">Go to face recognition page</a>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script>
+     
+    </script> -->
+
+    <script src="{{url_for('static', filename='js/img_capture.js')}}"></script>
+<!-- </body>
+</html> -->
+

@@ -48,24 +48,35 @@ def create_img_csv(users_img_path:str, user_img_csv_path: str):
 def img_encode(user_img_csv_path: str, user_encoded_img_csv_path: str):
     """
     :@ params
-    user_img_csv_path: the path where the created csv file will be saved.
-    user_encoded_img_csv_path: path where the csv file of encoded image will be saved
+    user_img_csv_path: (to get raw img) the path where the csv file inclding user image path exist.
+    user_encoded_img_csv_path:(to save encoded img) path where the csv file of encoded image will be saved.
     """
-    df = read_csv(user_img_csv_path)
+    try:
+        df = read_csv(user_img_csv_path).drop_duplicates()
+        print("Face Recognition model updated")
+        print(df)
+    except:
+        df = read_csv("database/user_image.csv")
+        print("Exception! \nException in fetching: user_img_csv_path = 'database/user_registration_data.csv' ")
+
     known_face_encodings = []
     known_face_names = []
-    for i in range(len(df)):
-        user_image_path = df['img_path'][i]
-        user_name = df['img_label'][i]
-        known_face_names.append(user_name)
-        # print(f"User: {user_name}, Img Path: {user_image_path}")
+    for i in range(0,len(df)):
+        user_image_path = df['img_path'][i] #img_path
+        user_name = df['name'][i] #name
 
         # Load a sample picture and learn how to recognize it.
         img_loading = load_image_file(user_image_path)
         # print(img_loading)
-
-        img_encoding = face_encodings(img_loading)[0]
-        # print(face_encodings(img_loading))
+        try:
+            img_encoding = face_encodings(img_loading)[0]
+            # print(face_encodings(img_loading))
+            known_face_names.append(user_name)
+            print(user_name, user_image_path)
+            # print(f"User: {user_name}, Img Path: {user_image_path}")
+        except:
+            print("no face")
+            continue
 
         known_face_encodings.append(img_encoding)
     #     print(img_encoding)
@@ -76,7 +87,7 @@ def img_encode(user_img_csv_path: str, user_encoded_img_csv_path: str):
     # Create pandas daraframe
     df = DataFrame(   
         {
-            'user': known_face_names,
+            'name': known_face_names,
             'encoded_img' : known_face_encodings
         }
     )
@@ -84,47 +95,3 @@ def img_encode(user_img_csv_path: str, user_encoded_img_csv_path: str):
     df.to_csv(user_encoded_img_csv_path, index=False) #save dataframe to csv file
 
     return known_face_encodings, known_face_names
-
-
-# users_img_path = "static/image/users/"
-# user_img_csv_path = "database/user_image.csv"
-# user_encoded_img_csv_path = "database/encoded_img.csv"
-
-# known_face_encodings, known_face_names = img_encode(user_img_csv_path, user_encoded_img_csv_path)
-
-
-# fetch dataset of encoded image to get encoded img and user name
-# user_encoded_img_csv_path = "database/encoded_img.csv"
-# df = read_csv(user_encoded_img_csv_path, index_col= False)
-# known_face_encodings, known_face_names = list(df['encoded_img']), list(df['user'])
-# print(known_face_names)
-
-# print(known_face_encodings[0])
-
-# img_encode(user_img_csv_path, user_encoded_img_csv_path)
-
-# df = read_csv(user_img_csv_path)
-# known_face_encodings = []
-# known_face_names = []
-# for i in range(len(df)):
-#     user_image_path = df['img_path'][i]
-#     user_name = df['img_label'][i]
-#     known_face_names.append(user_name)
-#     print(f"User: {user_name}, Img Path: {user_image_path}")
-
-#     # Load a sample picture and learn how to recognize it.
-#     img_loading = load_image_file(user_image_path)
-#     img_encoding = face_encodings(img_loading)[0]
-#     known_face_encodings.append(img_encoding)
-#     print(img_encoding)
-#     print()
-
-# # fetch dataset of encoded image to get encoded img and user name
-# user_encoded_img_csv_path = "database/encoded_img.csv"
-# df = read_csv(user_encoded_img_csv_path, index_col= False)
-# known_face_encodings, known_face_names = list(df['encoded_img']), list(df['user'])
-# # print(known_face_encodings)
-
-
-# for i in known_face_encodings:
-#     print(i)
