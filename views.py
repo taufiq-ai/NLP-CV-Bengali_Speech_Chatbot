@@ -4,9 +4,10 @@ import joblib
 import os.path
 import os
 from face_verification import Video, gen, face_authenticated
-from text_to_speech import text_to_speech
-from speech_to_text import speech_to_text
-from chatbot import chatbot_train, chatbot_ans
+# from text_to_speech import text_to_speech
+# from speech_to_text import speech_to_text
+# from chatbot import chatbot_train, chatbot_ans
+from interactive_agent import interactive_agent
 import base64
 import csv
 
@@ -48,7 +49,7 @@ def video():
 @app.route('/verified')
 def verification():
     authenticated = face_authenticated()
-    return render_template('conversation.html', verification = authenticated)
+    return render_template('verification.html', verification = authenticated)
 
 
 
@@ -94,7 +95,9 @@ def signup():
 
         return render_template('img_capture.html')
 
-"""Img Capture for registration"""
+
+
+"""Img Capture for signup/registration"""
 # Save captureed image
 @app.route('/upload', methods=['POST'])
 def upload():
@@ -127,11 +130,18 @@ def signin():
 
 
 """Speech Chatbot"""
+
+@app.route('/goto_conversation')
+def goto_conversation():
+    return render_template('conversation.html')
+
+
 @app.route('/conversation', methods=["GET","POST"])
 def conversation():
     # test_text = speech_to_text()
     # text = chatbot_ans(sentence_embeddings,test_text, data)
     # text_to_speech(text)
+    interactive_agent()
     return render_template('conversation.html')
 
 # app.run(debug=True, threaded = True)
