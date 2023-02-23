@@ -2,7 +2,72 @@ import cv2
 import face_recognition
 import numpy as np
 from pandas import read_csv
-from face_encoding import img_encode
+# from FaceRecognition.face_encoding import img_encode
+
+
+
+"""Face encoding part START----"""
+from face_recognition import load_image_file, face_encodings
+from os import listdir
+from pandas import DataFrame, read_csv
+
+
+def img_encode(user_img_csv_path: str, user_encoded_img_csv_path: str):
+    """
+    :@ params
+    user_img_csv_path: (to get raw img) the path where the csv file inclding user image path exist.
+    user_encoded_img_csv_path:(to save encoded img) path where the csv file of encoded image will be saved.
+    """
+    try:
+        df = read_csv(user_img_csv_path).drop_duplicates()
+        # print("Face Recognition model updated")
+        # print(df)
+    except:
+        df = read_csv("database/user_image.csv")
+        # print("Exception! \nException in fetching: user_img_csv_path = 'database/user_registration_data.csv' ")
+
+    known_face_encodings = []
+    known_face_names = []
+    for i in range(0,len(df)):
+        user_image_path = df['img_path'][i] #img_path
+        user_name = df['name'][i] #name
+
+        # Load a sample picture and learn how to recognize it.
+        img_loading = load_image_file(user_image_path)
+        # print(img_loading)
+        try:
+            img_encoding = face_encodings(img_loading)[0]
+            # print(face_encodings(img_loading))
+            known_face_names.append(user_name)
+            # print(user_name, user_image_path)
+            # print(f"User: {user_name}, Img Path: {user_image_path}")
+        except:
+            print("no face")
+            continue
+
+        known_face_encodings.append(img_encoding)
+    #     print(img_encoding)
+    #     print()
+    # print(known_face_names)
+    # print(known_face_encodings)
+
+    # Create pandas daraframe
+    df = DataFrame(   
+        {
+            'name': known_face_names,
+            'encoded_img' : known_face_encodings
+        }
+    )
+    # print(df)
+    df.to_csv(user_encoded_img_csv_path, index=False) #save dataframe to csv file
+
+    return known_face_encodings, known_face_names
+
+"""Face encoding part END----"""
+
+
+
+
 authenticated = False
 
 # user_img_csv_path = "database/user_registration_data.csv"
@@ -81,8 +146,8 @@ class Video(object):
 
 
 def gen(camera):
-    user_img_csv_path = "database/user_registration_data.csv"
-    user_encoded_img_csv_path = "database/encoded_img.csv"
+    user_img_csv_path = "database/user_registration_data.csv"   #csv file where img_path of user's picture is available
+    user_encoded_img_csv_path = "database/encoded_img.csv"      # csv path and file name which will store the user name and encoded image as list
     known_face_encodings, known_face_names = img_encode(user_img_csv_path, user_encoded_img_csv_path)
     print("Images encoded")
     while True:

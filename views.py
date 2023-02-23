@@ -3,12 +3,10 @@ import pandas as pd
 import joblib
 import os.path
 import os
-from face_verification import Video, gen, face_authenticated
-# from text_to_speech import text_to_speech
-# from speech_to_text import speech_to_text
-# from chatbot import chatbot_train, chatbot_ans
-from interactive_agent import interactive_agent
-import base64
+
+from FaceRecognition.face_verification import Video, gen, face_authenticated  # self defined package: FaceRecognition
+from interactive_agent import interactive_agent  # execute STT, CA, TTS at a time
+import base64  # decode captured image, captured image means which image is captured during registration
 import csv
 
 
@@ -35,18 +33,18 @@ def index():
 
 
 """Face Authentication"""
-@app.route('/authentication')
+@app.route('/authentication')   # redirect to face authentication page from navbar
 def authentication():
     return render_template('face_authentication.html')
 
 
-@app.route('/video')
+@app.route('/video')            # generate video streaming and recognize face
 def video():
     return Response(gen(Video()), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 # New added start
-"""User Access"""
-@app.route('/verified')
+"""User Access after Face Authentication"""
+@app.route('/verified')        # If face is recognized, redirect to verification done page after clicking verify button
 def verification():
     authenticated = face_authenticated()
     return render_template('verification.html', verification = authenticated)
@@ -58,6 +56,7 @@ def verification():
 @app.route('/login_registration')
 def login_registration():
     return render_template('login_registration.html')
+
 
 img_file_name = "static/image/users/unnamed.jpeg"
 @app.route("/signup", methods=["GET","POST"])
@@ -98,7 +97,7 @@ def signup():
 
 
 """Img Capture for signup/registration"""
-# Save captureed image
+# Save captured image
 @app.route('/upload', methods=['POST'])
 def upload():
     image_data = request.form['image']
@@ -130,8 +129,7 @@ def signin():
 
 
 """Speech Chatbot"""
-
-@app.route('/goto_conversation')
+@app.route('/goto_conversation') 
 def goto_conversation():
     return render_template('conversation.html')
 
