@@ -13,28 +13,18 @@ import csv
 
 app=Flask(__name__)
 
-"""For chatbot check if the model exists in the database"""
-data = pd.read_csv("database/data/transcript_domain.csv",header=None)
-# check if the sentence embedding has done, train otherwise
-data_path = "database/data/"
-if os.path.exists(data_path+"sentence_embeddings"):
-    sentence_embeddings = joblib.load(data_path+"sentence_embeddings")
-else: 
-    sentence_embeddings = chatbot_train(data)
-    joblib.dump(sentence_embeddings, data_path+"sentence_embeddings")
+# """For chatbot check if the model exists in the database"""
+# data = pd.read_csv("database/data/transcript_domain.csv",header=None)
+
+
+# # check if the sentence embedding has done, train otherwise
+# data_path = "database/data/"
+# if os.path.exists(data_path+"sentence_embeddings"):
+#     sentence_embeddings = joblib.load(data_path+"sentence_embeddings")
+# else: 
+#     sentence_embeddings = chatbot_train(data)
+#     joblib.dump(sentence_embeddings, data_path+"sentence_embeddings")
     
-
-# """check wheater the registration csv is available on the database"""
-# if not os.path.exists("database/user_registration_data.csv"):
-#     # Define the header row as a list of column names
-#     header = ['name', 'mobile', 'nid', 'img_path']
-#     # Open the CSV file in write mode
-#     with open('database/user_registration_data.csv', mode='w', newline='') as file:
-#         writer = csv.writer(file)
-#         # Write the header row to the CSV file
-#         writer.writerow(header)
-#         file.close()
-
 
 
 """Home Page"""
@@ -82,10 +72,6 @@ def signup():
         global img_file_name 
         img_file_name = img_path_users+name+ ".jpeg"
 
-
-        # Define the header row as a list of column names
-        # header = ['name', 'mobile', 'nid', 'img_path']
-
         #pass context: dict
         context = {'name':name, 'mobile':mobile, 'nid':nid, 'img_path':img_file_name}
 
@@ -108,11 +94,7 @@ def signup():
 
         return render_template('img_capture.html')
 
-"""Img Capture"""
-# @app.route('/img')
-# def img_capture():
-#     return render_template('img_capture.html')
-
+"""Img Capture for registration"""
 # Save captureed image
 @app.route('/upload', methods=['POST'])
 def upload():
@@ -142,16 +124,14 @@ def signin():
         context = {'nid':nid, 'mobile':mobile}
         pass
 
-# New added end
-
 
 
 """Speech Chatbot"""
 @app.route('/conversation', methods=["GET","POST"])
 def conversation():
-    test_text = speech_to_text()
-    text = chatbot_ans(sentence_embeddings,test_text, data)
-    text_to_speech(text)
+    # test_text = speech_to_text()
+    # text = chatbot_ans(sentence_embeddings,test_text, data)
+    # text_to_speech(text)
     return render_template('conversation.html')
 
 # app.run(debug=True, threaded = True)

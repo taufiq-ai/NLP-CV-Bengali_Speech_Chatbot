@@ -1,7 +1,8 @@
 from sklearn.metrics.pairwise import cosine_similarity
-import pandas as pd
-import joblib
+from joblib import dump, load
 from sentence_transformers import SentenceTransformer
+from pandas import read_csv
+
 
 
 def chatbot_train(data):
@@ -19,21 +20,20 @@ def chatbot_train(data):
     # save the trained model ('paraphrase-mpnet-base-v2') for further use
     model_directory = "database/model/"
     data_path = "database/data/"
-    joblib.dump(model, model_directory+'chatbot_model.joblib')
-    joblib.dump(sentence_embeddings, data_path+"sentence_embeddings")
+    dump(model, model_directory+'chatbot_model.joblib')
+    dump(sentence_embeddings, data_path+"sentence_embeddings")
     return sentence_embeddings
 # chatbot_train("database/data/transcript_domain.csv")
 
-def chatbot_ans(sentence_embeddings, text:str, data):
-    # load the saved paraphrase-mpnet-base-v2' model
-    model_directory = "database/model/"
-    loaded_model = joblib.load(model_directory+'chatbot_model.joblib')
 
-    # embed/encode queries asked by user 
+
+
+def chatbot_ans(loaded_model, sentence_embeddings, text:str, data):
     test_embeddings=loaded_model.encode([text])
-
+    # print('text encoded')
     # find similary scores (Asked query vs trained queries)
     score=cosine_similarity(sentence_embeddings, test_embeddings, dense_output=False)
+    # print(score)
     # find the index of the trained query/question which have maximum similarity
     max_similarity = 0
     max_similarity_index = 0
@@ -42,9 +42,23 @@ def chatbot_ans(sentence_embeddings, text:str, data):
         if max_similarity<=e[0]:
             max_similarity = e[0]
             max_similarity_index = i
-    text = data[1][max_similarity_index]
+    # print(max_similarity_index)
+    # print(max_similarity)
+    text = data.iloc[max_similarity_index, 1]
+    # print(data.shape)
+    # text = data[1][max_similarity_index]
     # print(text)
     # print("similarity found")
     return text
+
+
+# if __name__ == "__main__":
+#     # Chatbot
+#     text_from_ASR = "মিনিমাম কোয়ালিফিকেশন কি?"
+#     loaded_model = load('database/model/chatbot_model.joblib')
+#     sentence_embeddings = load('database/data/sentence_embeddings')
+#     data = read_csv("database/data/transcript_domain.csv")
+#     text_similar_ans = chatbot_ans(loaded_model, sentence_embeddings, text_from_ASR, data)
+#     print(text_similar_ans)
 
 
