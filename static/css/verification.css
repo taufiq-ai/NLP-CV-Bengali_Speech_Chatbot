@@ -2,3 +2,8 @@ svg{
     display: block;
     margin: 0 auto;
   }
+
+.centered-heading {
+  width: 100%;
+  text-align: center;
+}

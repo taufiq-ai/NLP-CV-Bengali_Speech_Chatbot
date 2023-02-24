@@ -23,7 +23,7 @@ def img_encode(user_img_csv_path: str, user_encoded_img_csv_path: str):
         # print("Face Recognition model updated")
         # print(df)
     except:
-        df = read_csv("database/user_image.csv")
+        df = read_csv("static/data/FaceRecognition/exception_handling_images.csv")
         # print("Exception! \nException in fetching: user_img_csv_path = 'database/user_registration_data.csv' ")
 
     known_face_encodings = []
@@ -146,8 +146,9 @@ class Video(object):
 
 
 def gen(camera):
-    user_img_csv_path = "database/user_registration_data.csv"   #csv file where img_path of user's picture is available
-    user_encoded_img_csv_path = "database/encoded_img.csv"      # csv path and file name which will store the user name and encoded image as list
+    user_img_csv_path = "static/data/FaceRecognition/user_registration_data.csv"   #csv file where img_path of user's picture is available
+    user_encoded_img_csv_path = "static/data/FaceRecognition/encoded_img.csv"      # csv path and file name which will store the user name and encoded image as list
+
     known_face_encodings, known_face_names = img_encode(user_img_csv_path, user_encoded_img_csv_path)
     print("Images encoded")
     while True:

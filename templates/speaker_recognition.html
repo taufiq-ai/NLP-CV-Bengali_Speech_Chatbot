@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block body %}
+<link href="{{url_for('static', filename='css/speaker_recognition.css')}}" rel="stylesheet"/>
+
+
+
+
+<div class="container">
+    <div class="row special_div">
+
+        <div class="col-lg-4">
+        </div> 
+
+        <div class="col-lg-4">
+            <div class="card card-margin">
+                <div class="card-header no-border">
+                    <h5 class="card-title">Speaker Recognition</h5>
+                </div>
+                <div class="card-body pt-0">
+                    <div class="widget-49">
+                        <div class="widget-49-title-wrapper">
+                            <div class="widget-49-date-warning">
+                                <!-- <span class="widget-49-date-day">13</span> -->
+                                <!-- <span class="widget-49-date-month">apr</span> -->
+                            </div>
+                            <div class="widget-49-meeting-info">
+                                <span class="widget-49-pro-title"> <b>Please read aloud the following sentence</b> </span>
+                                <!-- <span class="widget-49-meeting-time">12:00 to 13.30 Hrs</span> -->
+                            </div>
+                        </div>
+                        <ol class="widget-49-meeting-points">
+                            <li class="widget-49-meeting-item"><span>কৃত্রিম বুদ্ধিমত্তার জনক ব্রিটিশ বিজ্ঞানী ও গণিতবিদ অ্যালান টুরিং</span></li>
+                            <!-- <li class="widget-49-meeting-item"><span>App design contract confirmed</span></li> -->
+                            <!-- <li class="widget-49-meeting-item"><span>Client request to send invoice</span></li> -->
+                        </ol>
+                        <div class="widget-49-meeting-action">
+                            <!-- <a href="#" class="btn btn-sm btn-flash-border-warning">View All</a> -->
+
+                            <!-- SPEAKER RECOGNITION - RECORD AND RECOGNIZE VOICE -->
+                            <form action="/speaker_recognition" method="post">
+                                <button type="submit"> <!-- id="flash-message-button"-->
+                                    <i class="fa fa-microphone small p-2 me-3  text-white rounded-3 bg-primary wave-button" style="font-size:30px;color:rgb(130, 159, 238)"></i>
+                                </button>
+                                <!-- <div id="flash-message" style="display:none;">Small flash message</div> -->
+                            </form>
+                            <!-- END ---------- SPEAKER RECOGNITION - RECORD AND RECOGNIZE VOICE -->
+                        </div>
+                        <hr>
+
+                        {% if speech_authentication %} 
+                        <div class="widget-49-meeting-action">
+                            <!-- <div> <span class="widget-49-pro-title">Recognized</span></div> -->
+                            <!-- <span class="widget-49-pro-title">speaker: {{context['speaker']}}</span> -->
+                        <!-- <hr> -->
+                            <a href="{{ url_for('goto_conversation') }}" class="btn btn-success">Start Conversation</a>
+                            <!-- <a href="#" class="btn btn-sm btn-flash-border-warning">View All</a> -->
+                        </div>
+
+
+                        {% else %}
+                        <div class="widget-49-meeting-action">
+                            <!-- <div> <span>Can not recognize</span></div>
+                            <span class="widget-49-meeting-time">continue without speaker recognition</span> -->
+                        <!-- <hr> -->
+                            <a href="{{ url_for('goto_conversation') }}" class="btn btn-warning">Skip</a>
+                            <!-- <a href="#" class="btn btn-sm btn-flash-border-warning">View All</a> -->
+                        </div>
+                        {% endif %}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+        </div> 
+        
+    </div>
+    </div>
+
+
+
+{% endblock %}

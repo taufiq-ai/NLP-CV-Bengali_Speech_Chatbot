@@ -1,11 +1,14 @@
 
 
   /* CSS FOR VIDEO */
-
+  body{
+    background: #F4F7FD;
+    margin-top:100px;
+}
   .video-container {
     position: relative;
     padding-bottom: 56.25%;
-    padding-top: 35px;
+    padding-top: 20px;
     height: 0;
     overflow: hidden;
   }

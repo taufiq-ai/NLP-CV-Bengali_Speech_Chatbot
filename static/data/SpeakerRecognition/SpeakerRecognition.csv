@@ -1,0 +1,4 @@
+,audio_path,target_speaker
+0,static/data/SpeakerRecognition//train/Taufiq/2.wav,Taufiq
+1,static/data/SpeakerRecognition//train/Taufiq/3.wav,Taufiq
+2,static/data/SpeakerRecognition//train/Taufiq/1.wav,Taufiq

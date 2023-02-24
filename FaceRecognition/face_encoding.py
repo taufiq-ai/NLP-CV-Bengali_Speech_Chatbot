@@ -53,8 +53,8 @@ def img_encode(user_img_csv_path: str, user_encoded_img_csv_path: str):
     """
     try:
         df = read_csv(user_img_csv_path).drop_duplicates()
-        print("Face Recognition model updated")
-        print(df)
+        # print("Face Recognition model updated")
+        # print(df)
     except:
         df = read_csv("database/user_image.csv")
         print("Exception! \nException in fetching: user_img_csv_path = 'database/user_registration_data.csv' ")
@@ -72,7 +72,7 @@ def img_encode(user_img_csv_path: str, user_encoded_img_csv_path: str):
             img_encoding = face_encodings(img_loading)[0]
             # print(face_encodings(img_loading))
             known_face_names.append(user_name)
-            print(user_name, user_image_path)
+            # print(user_name, user_image_path)
             # print(f"User: {user_name}, Img Path: {user_image_path}")
         except:
             print("no face")
