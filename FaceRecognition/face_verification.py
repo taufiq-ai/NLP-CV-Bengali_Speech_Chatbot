@@ -15,15 +15,17 @@ from pandas import DataFrame, read_csv
 def img_encode(user_img_csv_path: str, user_encoded_img_csv_path: str):
     """
     :@ params
-    user_img_csv_path: (to get raw img) the path where the csv file inclding user image path exist.
+    user_img_csv_path: (to get raw img) the path where the csv file inclding user image path exist. (registration)
     user_encoded_img_csv_path:(to save encoded img) path where the csv file of encoded image will be saved.
     """
     try:
         df = read_csv(user_img_csv_path).drop_duplicates()
+        print("Using registered image database")
         # print("Face Recognition model updated")
         # print(df)
     except:
         df = read_csv("static/data/FaceRecognition/exception_handling_images.csv")
+        print("using unregistered image database")
         # print("Exception! \nException in fetching: user_img_csv_path = 'database/user_registration_data.csv' ")
 
     known_face_encodings = []

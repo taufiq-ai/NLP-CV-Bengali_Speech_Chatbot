@@ -23,9 +23,11 @@ def create_img_csv(users_img_path:str, user_img_csv_path: str):
     img_names = [] # user name or label
 
     for img_file in listdir(users_img_path):
-        img_files.append(users_img_path+img_file)
-        name = img_file.split('.')[0] #split the image file in dot(.); As the file name has been written as username.extention, it will get user's name
-        img_names.append(name)
+        if img_file.split('.')[1] == ("jpeg" or ".jpeg" or "jpg" or ".jpg"):
+            print(img_file)
+            img_files.append(users_img_path+img_file)
+            name = img_file.split('.')[0] #split the image file in dot(.); As the file name has been written as username.extention, it will get user's name
+            img_names.append(name)
     # print(img_files)
     # print(img_names)
 
@@ -34,7 +36,7 @@ def create_img_csv(users_img_path:str, user_img_csv_path: str):
         
         {
             'img_path' : img_files,
-            'img_label': img_names
+            'name': img_names
         }
     )
     # print(df)
@@ -95,3 +97,11 @@ def img_encode(user_img_csv_path: str, user_encoded_img_csv_path: str):
     df.to_csv(user_encoded_img_csv_path, index=False) #save dataframe to csv file
 
     return known_face_encodings, known_face_names
+
+
+
+
+
+
+# create_img_csv(users_img_path= 'static/data/FaceRecognition/', user_img_csv_path = 'static/data/FaceRecognition/exception_handling_images.csv')
+
