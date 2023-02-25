@@ -10,7 +10,7 @@ def speech_to_text(path_to_save_ASR_audio, path_to_save_ASR_text):
         r.adjust_for_ambient_noise(source)
         try:
             print("Please say your query...")
-            audio = r.listen(source = source, timeout = None, phrase_time_limit=6)
+            audio = r.listen(source = source, timeout = 3, phrase_time_limit=5)
             print("Recognizing Now .... ")
             text  = r.recognize_google(audio_data = audio,language='bn-BD', with_confidence= True, show_all=False)
             
@@ -20,6 +20,8 @@ def speech_to_text(path_to_save_ASR_audio, path_to_save_ASR_text):
                 f.close()
            
             #Write text
+
+
             with open(path_to_save_ASR_text+"input.txt", "w") as f:
                 f.write(text[0])
                 f.close()

@@ -73,7 +73,6 @@ scipy==1.10.0
 sentence-transformers==2.2.2
 sentencepiece==0.1.97
 six==1.16.0
-sklearn==0.0.post1
 sounddevice==0.4.5
 soundfile==0.12.1
 SpeechRecognition==3.9.0
