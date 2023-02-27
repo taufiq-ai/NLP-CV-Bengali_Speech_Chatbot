@@ -1,1 +1,2 @@
 database/model/chatbot_model.joblib filter=lfs diff=lfs merge=lfs -text
+static/model/SpeechSimilarity/chatbot_model.joblib filter=lfs diff=lfs merge=lfs -text
