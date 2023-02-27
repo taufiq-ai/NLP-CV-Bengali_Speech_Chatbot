@@ -53,8 +53,8 @@ https://user-images.githubusercontent.com/70132613/220410790-5056f041-5a2e-4c4a-
 ```
 curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
 sudo apt-get install git-lfs
-git lfs track <path to file>
-git add <path to file>
-git commit -m"commit file"
+git lfs track path_to_file
+git add path_to_file
+git commit -m "commit"
 
 ```
